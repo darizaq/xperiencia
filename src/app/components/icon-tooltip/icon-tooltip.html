@@ -1,0 +1,9 @@
+<button
+  type="button"
+  class="icon-tooltip"
+  [class.icon-tooltip--dim]="dim()"
+  [attr.data-tip]="tooltip()"
+  [attr.aria-label]="tooltip()"
+>
+  <ng-content />
+</button>

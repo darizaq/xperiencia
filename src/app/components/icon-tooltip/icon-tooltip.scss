@@ -1,0 +1,64 @@
+:host {
+  --icon-tooltip-orange: #f5871f;
+
+  display: contents;
+}
+
+.icon-tooltip {
+  width: clamp(30px, 5.13vw, 40px);
+  height: clamp(30px, 5.13vw, 40px);
+  border-radius: clamp(8px, 1.41vw, 11px);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--icon-tooltip-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  ::ng-deep svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  &--dim {
+    color: #9a9a9a;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 9px);
+    right: 0;
+    white-space: nowrap;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 9px;
+    padding: 7px 10px;
+    font-family: Poppins, sans-serif;
+    font-size: clamp(12px, 1.67vw, 13px);
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(4px);
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 2px;
+  }
+}

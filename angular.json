@@ -90,6 +90,30 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "build-element": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/elements.main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "index": false,
+            "outputPath": "dist/xperiencia-element",
+            "styles": [
+              "src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "none",
+              "optimization": true
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

@@ -1,0 +1,82 @@
+[
+  {
+    "dayNumber": 1,
+    "elevation": 4480,
+    "category": "summit",
+    "basePlace": "Laguna Churup",
+    "title": "Caminata de aclimatación",
+    "content": "<ul><li>6:00 am: Desayuno nutritivo, a gusto personal.</li><li>10:00 am: Traslado a la caminata de aclimatación en la Laguna Churup.</li><li>11:30 am: Trekking de reconocimiento de 6 km aproximadamente, ubicado a 4.480 msnm.</li><li>12:30 pm: Almuerzo y alistamiento de equipo con lo esencial, preparativos para nuestra primera montaña.</li><li>6:00 pm: Cena y descanso (no incluido).</li></ul>",
+    "mealsIncluded": false,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 2,
+    "elevation": 4900,
+    "category": "baseCamp",
+    "basePlace": "Yanapacha",
+    "title": "Caminata de aproximación",
+    "content": "<p>Huaraz – Cebollapampa – Campo Base</p><ul><li>07:00 am: Salida de Huaraz en transporte privado hacia el Callejón de Huaylas, pasando por Yungay.</li><li>10:30 am: Llegada a la curva de Cebollapampa, en la carretera hacia el Paso Portachuelo de Llanganuco.</li><li>11:00 am: Inicio de la aproximación: caminata de 3 a 4 horas por un sendero definido, ganando altura gradualmente.</li><li>02:30 pm: Llegada al Campo Base de Yanapacha (aprox. 4.900 msnm).</li><li>Tarde: Preparación de equipo técnico (crampones, piolets, cuerdas) y cena temprana para descansar.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 3,
+    "elevation": 5460,
+    "category": "summit",
+    "basePlace": "Yanapacha",
+    "title": "Día de cumbre",
+    "content": "<p>Intento de cumbre – Retorno a Huaraz</p><ul><li>02:00 am: Bebida caliente y salida del campamento.</li><li>03:00 am: Llegada al borde del glaciar. Comienza la parte técnica con encordamiento; la ascensión tiene pendientes de entre 45° y 65°, dependiendo de la ruta y las condiciones de la nieve.</li><li>07:30 am: Cumbre del Nevado Yanapacha. Vista panorámica del Huascarán y el Contrahierbas.</li><li>10:00 am: Descenso (con rápel en los tramos más empinados) de vuelta al Campo Base.</li><li>12:00 m: Almuerzo y tarde de descanso.</li><li>06:00 pm: Cena y descanso.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 4,
+    "elevation": 3052,
+    "category": "baseCity",
+    "basePlace": "Huaraz",
+    "title": "Día libre",
+    "content": "<p>Descanso</p>",
+    "mealsIncluded": false,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 5,
+    "elevation": 4300,
+    "category": "baseCamp",
+    "basePlace": "Alpamayo",
+    "title": "Caminata de aproximación",
+    "content": "<p>Huaraz – Cashapampa – Campo Base</p><ul><li>05:00 am: Recogida en el hotel en Huaraz, en transporte privado.</li><li>06:00 am: Desayuno y levantamiento de campamento.</li><li>08:00 am: Alistamiento de equipos, encuentro con arrieros y carga de equipaje en burros.</li><li>09:00 am: Inicio del trekking por la quebrada.</li><li>12:00 m: Llegada a Llamacorral (3.760 msnm). Parada técnica para almorzar.</li><li>01:00 pm: Continuación del trekking desde Llamacorral hasta el Campo Base (Arhuaycocha), pasando por las lagunas Ichiccocha y Jatuncocha.</li><li>05:00 pm: Llegada al Campo Base (Arhuaycocha), a 4.300 msnm. Es el punto donde termina el tránsito con animales (burros) y comienza el terreno de alta montaña. Preparación de equipo para el glaciar.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 6,
+    "elevation": 5400,
+    "category": "baseCamp",
+    "basePlace": "Alpamayo",
+    "title": "Caminata de aproximación",
+    "content": "<p>Campo Base – Campamento Alto (Campo 1)</p><ul><li>08:00 am: Inicio del trekking. Tramo de caminata pesada hasta la morrena.</li><li>11:00 am: Llegada al borde del glaciar y cambio a crampones. Progresión encordada.</li><li>01:00 pm: Escalada técnica del muro de hielo/nieve para acceder al collado y subida de equipo.</li><li>03:00 pm: Llegada al Campamento Alto (5.400 msnm), con vistas directas a la pared Ferrari del intento de cumbre. Levantamiento de campamento.</li><li>06:00 pm: Cena y descanso.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 7,
+    "elevation": 4300,
+    "category": "baseCamp",
+    "basePlace": "Alpamayo",
+    "title": "Caminata de retorno",
+    "content": "<p>Campamento Alto – Campo Base (Arhuaycocha)</p><ul><li>08:00 am: Desmontaje del campamento, tras disfrutar de un amanecer inolvidable, y desayuno.</li><li>10:00 am: Inicio del descenso técnico por el glaciar, con rápel o descenso encordado desde el collado.</li><li>12:00 m: Llegada a la morrena (4.900 msnm). Cambio de calzado y alistamiento de equipo técnico.</li><li>03:00 pm: Llegada al Campo Base (4.300 msnm).</li><li>04:00 pm: Organización de equipo para carga en burros al día siguiente. Cena y descanso.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 8,
+    "elevation": 3052,
+    "category": "baseCity",
+    "basePlace": "Huaraz",
+    "title": "Retorno y fin de expedición",
+    "content": "<p>Campo Base – Cashapampa – Huaraz</p><ul><li>07:00 am: Desmontaje del campamento, desayuno y carga de equipaje pesado en los burros.</li><li>09:00 am: Inicio del trekking de retorno por la Quebrada Santa Cruz (tramo largo, pero en descenso constante).</li><li>01:00 pm: Parada técnica para almuerzo de marcha en Llamacorral.</li><li>03:30 pm: Llegada a Cashapampa (2.900 msnm). Fin del trekking.</li><li>04:00 pm: Transporte privado de retorno a Huaraz.</li><li>07:00 pm: Llegada a Huaraz.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": false
+  }
+]

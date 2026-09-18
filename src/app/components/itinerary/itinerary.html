@@ -1,0 +1,25 @@
+<div class="itinerary">
+  @if (showRangeTabs()) {
+    <app-date-range-tabs
+      class="itinerary__date-range-tabs"
+      [ranges]="dateRanges()"
+      [selectedIndex]="selectedRangeIndex()"
+      (rangeSelected)="selectRange($event)"
+    />
+  }
+
+  <app-chart
+    class="itinerary__chart"
+    [points]="chartPoints()"
+    [labels]="legendLabels()"
+    [selectedDate]="selectedDate()"
+    (markerSelected)="selectDate($event)"
+  />
+
+  <app-tabs
+    class="itinerary__tabs"
+    [items]="tabItems()"
+    [selectedDate]="selectedDate()"
+    (tabSelected)="selectDate($event)"
+  />
+</div>

@@ -1,0 +1,102 @@
+[
+  {
+    "dayNumber": 1,
+    "elevation": 3640,
+    "category": "baseCity",
+    "basePlace": "La Paz",
+    "title": "Día de llegada",
+    "content": "<p>Encuentro en La Paz, Bolivia, charla y organización.</p>",
+    "mealsIncluded": false,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 2,
+    "elevation": 5000,
+    "category": "baseCamp",
+    "basePlace": "Pequeño Alpamayo",
+    "title": "Caminata de aproximación",
+    "content": "<p>La Paz – Laguna Chiarkhota</p><ul><li>8:30 AM: Salida de La Paz hacia La Rinconada (4.500 msnm), un viaje de aprox. 2.5 a 3 horas.</li><li>12:00 m: Almuerzo.</li><li>Aproximación: Caminata suave de 1 hora hasta el Campo Base en Laguna Chiarkhota (4.670 msnm).</li><li>3:00 pm: Llegada a campamento base.</li><li>6:00 pm: Cena y descanso.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 3,
+    "elevation": 5370,
+    "category": "summit",
+    "basePlace": "Pequeño Alpamayo",
+    "title": "Día de cumbre",
+    "content": "<ul><li>01:00 AM: Inicio del ascenso. Se bordea la laguna y se asciende por morrena hasta el glaciar. Aproximadamente 6 a 8 horas.</li><li>Pico Tarija (5.300 msnm): Se debe alcanzar primero esta cumbre. Desde aquí se realiza un pequeño descenso técnico en roca/hielo (aprox. 50 m) para conectar con la arista final.</li><li>Cumbre: Ascenso por la arista final hasta la cima del Pequeño Alpamayo (5.410 msnm).</li><li>Retorno: Descenso al Campo Base, breve descanso para tomar desayuno, caminata a La Rinconada y transporte de vuelta a La Paz (llegada aprox. 6:00 pm).</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 4,
+    "elevation": 3640,
+    "category": "baseCity",
+    "basePlace": "La Paz",
+    "title": "Día libre",
+    "content": "<p>Descanso</p>",
+    "mealsIncluded": false,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 5,
+    "elevation": 5130,
+    "category": "baseCamp",
+    "basePlace": "Huayna Potosí",
+    "title": "Caminata de aproximación",
+    "content": "<p>El Huayna Potosí (6.088 msnm) es posiblemente el «seismil» más popular del mundo debido a su rápido acceso desde La Paz y su ruta normal técnicamente asequible.</p><p>La Paz – Campo Base – Práctica en glaciar</p><ul><li>Salida: Partida desde La Paz esquina Illampu y Sagárnaga (aprox. 8:30 AM) hacia el Paso Zongo (4.700 msnm). El trayecto dura unas 2 horas.</li><li>11:30 am: Almuerzo en el refugio del Campo Base.</li><li>11:30 am: Trekking durante 3 horas aproximadamente al campo alto de Huayna Potosí (5.270 msnm) y descanso.</li><li>5:00 pm: Cena y organización para el intento de cumbre.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 6,
+    "elevation": 6088,
+    "category": "summit",
+    "basePlace": "Huayna Potosí",
+    "title": "Día de cumbre",
+    "content": "<p>Intento de cumbre – Retorno a La Paz</p><ul><li>12:00 M: Desayuno y organización.</li><li>1:00 AM: Inicio del ascenso en total oscuridad. Se avanza encordado por el glaciar.</li></ul><p>Pasos clave:</p><ul><li>Pala Chica: Una pared de nieve/hielo de unos 30-50 m.</li><li>La arista final: Un tramo expuesto y estético que lleva directamente a la cima.</li><li>Cumbre: Llegada al amanecer, 6.088 msnm (aprox. 06:30 AM). Vistas espectaculares del Lago Titicaca y la Cordillera Real.</li><li>Descenso: Retorno al Campo Alto (2 horas), breve descanso, desayuno y descenso final al Campo Base (1.5 horas).</li><li>Retorno: Transporte de regreso a La Paz, llegando alrededor de las 4:00 pm.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 7,
+    "elevation": 3640,
+    "category": "baseCity",
+    "basePlace": "La Paz",
+    "title": "Día libre",
+    "content": "<p>Descanso</p>",
+    "mealsIncluded": false,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 8,
+    "elevation": 4500,
+    "category": "baseCamp",
+    "basePlace": "Illimani",
+    "title": "Ascenso en montaña",
+    "content": "<p>El Illimani (6.438 msnm) es el guardián de la ciudad de La Paz y el desafío definitivo para muchos montañistas en la Cordillera Real. Es una montaña exigente que requiere una condición física excelente y una aclimatación técnica previa (idealmente haber subido el Huayna Potosí antes).</p><p>Itinerario: Nevado Illimani (3 días)</p><p>La Paz – Pinaya – Campo Base (Puente Roto)</p><ul><li>8:00 AM: Traslado de La Paz en 4×4 hacia el pueblo de Pinaya (aprox. 3-5 horas). El camino ofrece vistas espectaculares del gigante de los Andes.</li><li>1:00 PM: Aproximación: Caminata de 2 a 3 horas desde Pinaya hasta el Campo Base, conocido como Puente Roto (4.500 msnm). Es un campamento cómodo y amplio.</li><li>4:00 PM: Descanso: Campamento base (carpa).</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 9,
+    "elevation": 5400,
+    "category": "baseCamp",
+    "basePlace": "Illimani",
+    "title": "Ascenso en montaña",
+    "content": "<p>Campo Base – Campo Alto (Nido de Cóndores)</p><ul><li>7:00 AM: Desayuno y alistamiento de equipos.</li><li>8:00 AM: Trekking exigente de 4 a 5 horas por sendero de roca y morrena.</li><li>1:00 PM: Campamento Nido de Cóndores (5.500 msnm). Es un campamento espectacular ubicado en una arista de roca, pero muy frío y expuesto al viento.</li><li>6:00 PM: Cena y descanso.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 10,
+    "elevation": 6438,
+    "category": "summit",
+    "basePlace": "Illimani",
+    "title": "Cumbre y fin de expedición",
+    "content": "<ul><li>12:00 PM: Intento de Cumbre Sur (6.438 msnm).</li><li>01:00 AM: Inicio del ascenso. Es una jornada larga de 6 a 9 horas de subida.</li><li>Desafíos técnicos:</li><li>La Gran Muralla.</li><li>Grietas: Se debe navegar con cuidado por un glaciar muy fracturado.</li><li>Altitud: El esfuerzo por encima de los 6.000 m es agotador.</li><li>Cumbre: Llegada a la cima sur, el punto más alto.</li><li>8:00 AM: Descenso: Retorno a Nido de Cóndores para descansar y desayunar. Continuar el descenso hasta el Campo Base.</li></ul><p>Campo Base – Pinaya – La Paz</p><ul><li>Descenso: Caminata final de retorno a Pinaya (2 horas).</li><li>Retorno: Encuentro con el transporte 4×4 y regreso a La Paz, llegando por la tarde para una merecida cena de celebración.</li><li>Al siguiente día vamos a pasear por el Salar de Uyuni, el cementerio de trenes y la Laguna Cañapa, para observar flamencos.</li></ul><p>Este último paseo corre por tu cuenta.</p>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  }
+]

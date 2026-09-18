@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #545454;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* Demo-only: styles the destination switcher, not part of the web component. */
+      .demo__destinations {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 20px;
+      }
+
+      .demo__destination {
+        flex: 1;
+        padding: 11px 0 12px;
+        background: #323232;
+        border: 0;
+        border-radius: 12px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 500;
+        color: #e2e2e2;
+        transition: color 0.15s ease, background-color 0.15s ease;
+      }
+
+      .demo__destination:hover {
+        color: #fff;
+        background: #404040;
+      }
+
+      .demo__destination--selected,
+      .demo__destination--selected:hover {
+        color: #fff;
+        background: #9d9d9d;
+        font-weight: 600;
+      }
+    </style>
+    <!-- Built by `npm run build:element` -> dist/xperiencia-element/browser/main.js -->
+    <script src="scripts/main.js"></script>
+  </head>
+  <body>
+    <h1>Web Component Demo</h1>
+
+    <div id="destination-tabs" class="demo__destinations" role="tablist" aria-label="Elegir destino"></div>
+    <div id="itinerary-container"></div>
+
+    <script src="scripts/web-component-demo.js"></script>
+  </body>
+</html>

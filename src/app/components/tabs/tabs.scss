@@ -1,0 +1,148 @@
+:host {
+  --tabs-orange: #f5871f;
+  --tabs-tile: #323232;
+  --tabs-ink: #ffffff;
+  --tabs-ink2: #c2c2c2;
+  --tabs-hair: rgba(255, 255, 255, 0.14);
+
+  display: block;
+  font-family: Poppins, sans-serif;
+  color: var(--tabs-ink);
+}
+
+.tabs {
+  display: flex;
+  gap: clamp(4px, 0.77vw, 6px);
+
+  &__tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(8px, 1.41vw, 11px) 0 clamp(9px, 1.54vw, 12px);
+    background: var(--tabs-tile);
+    border: 0;
+    border-radius: clamp(9px, 1.54vw, 12px);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: clamp(12px, 1.92vw, 15px);
+    font-weight: 500;
+    color: #e2e2e2;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:focus-visible {
+      outline: 2px solid var(--tabs-orange);
+      outline-offset: 2px;
+    }
+
+    &:hover {
+      color: #ffffff;
+      background: #404040;
+    }
+
+    &--selected {
+      color: #ffffff;
+      background: #9d9d9d;
+      font-weight: 600;
+    }
+
+    // `:hover` alone outweighs a single class on specificity, so the selected tab
+    // needs its own `:hover` override to keep its look when hovered.
+    &--selected:hover {
+      background: #9d9d9d;
+    }
+  }
+
+  &__panels {
+    margin-top: clamp(10px, 1.54vw, 12px);
+  }
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2.56vw, 20px);
+  }
+
+  &__datebox {
+    width: clamp(52px, 9.1vw, 71px);
+    height: clamp(58px, 10.13vw, 79px);
+    border-radius: clamp(9px, 1.54vw, 12px);
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    flex: none;
+  }
+
+  &__num {
+    font-size: clamp(21px, 3.85vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  &__mon {
+    font-family: inherit;
+    font-size: clamp(9px, 1.54vw, 12px);
+    letter-spacing: 0.16em;
+    color: #c2c2c2;
+  }
+
+  &__text {
+    flex: 1;
+  }
+
+  &__eyebrow {
+    font-family: inherit;
+    font-size: clamp(10px, 1.67vw, 13px);
+    letter-spacing: clamp(0.1em, 0.35vw, 0.18em);
+    color: #b0b0b0;
+    margin-bottom: clamp(3px, 0.64vw, 5px);
+  }
+
+  &__title {
+    font-size: clamp(16px, 3.01vw, 23.5px);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+
+  &__icons {
+    display: flex;
+    gap: clamp(6px, 1.28vw, 10px);
+    flex: none;
+  }
+
+  &__desc {
+    margin-top: clamp(12px, 2.05vw, 16px);
+    font-size: clamp(12.5px, 1.99vw, 15.5px);
+    line-height: 1.55;
+    color: var(--tabs-ink2);
+
+    ::ng-deep {
+      p + p,
+      ul + p {
+        margin-top: 9px;
+      }
+
+      ul {
+        margin: 9px 0 0;
+        padding-left: 20px;
+      }
+
+      li {
+        margin-top: 6px;
+
+        &::marker {
+          color: inherit;
+        }
+      }
+    }
+  }
+}

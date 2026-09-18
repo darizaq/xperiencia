@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.itinerary {
+  &__date-range-tabs {
+    display: block;
+    margin-bottom: clamp(14px, 2.56vw, 20px);
+  }
+
+  &__chart {
+    display: block;
+  }
+
+  &__tabs {
+    display: block;
+    margin-top: clamp(14px, 2.56vw, 20px);
+  }
+}

@@ -1,0 +1,52 @@
+:host {
+  display: block;
+}
+
+.demo {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(20px, 5.64vw, 44px) clamp(14px, 4.1vw, 32px) clamp(40px, 12.95vw, 101px);
+  background: #232323;
+  min-height: 100dvh;
+  font-family: Poppins, sans-serif;
+
+  &__destinations {
+    display: flex;
+    gap: 6px;
+    margin-bottom: clamp(20px, 5.64vw, 44px);
+  }
+
+  &__destination {
+    flex: 1;
+    padding: 11px 0 12px;
+    background: #323232;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    color: #e2e2e2;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:focus-visible {
+      outline: 2px solid #f5871f;
+      outline-offset: 2px;
+    }
+
+    &:hover {
+      color: #ffffff;
+      background: #404040;
+    }
+
+    &--selected {
+      color: #ffffff;
+      background: #9d9d9d;
+      font-weight: 600;
+    }
+
+    &--selected:hover {
+      background: #9d9d9d;
+    }
+  }
+}

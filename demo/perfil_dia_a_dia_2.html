@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Perfil de altura · día por día</title>
+<style>
+
+  :root {
+    --page:#232323; --card:#393939; --orange:#F5871F; --blue:#F0F0F0;
+    --panel:#545454; --tile:#323232;
+    --ink:#FFFFFF; --ink2:#C2C2C2; --ink3:#A8A8A8; --hair:rgba(255,255,255,.14);
+    --sans:'Poppins','Helvetica Neue',Arial,sans-serif; --mono:'Poppins','Helvetica Neue',Arial,sans-serif;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { width:100%; max-width:1100px; margin:0 auto; background:var(--page);
+         font-family:var(--sans); color:var(--ink); overflow-x:hidden;
+         padding:clamp(20px,5.64vw,44px) clamp(14px,4.10vw,32px) clamp(40px,12.95vw,101px);
+         -webkit-font-smoothing:antialiased; }
+  .card { background:var(--card); border:0; border-radius:16px; }
+  .panel { background:transparent; border-radius:0; padding:0;
+           margin-top:clamp(30px,5.64vw,44px); }
+  .card-head { display:flex; align-items:center; gap:clamp(12px,1.79vw,14px);
+               margin-bottom:clamp(14px,2.31vw,18px); }
+  .tile { width:clamp(44px,6.92vw,54px); height:clamp(44px,6.92vw,54px); flex:none;
+          border-radius:12px; background:var(--tile); color:var(--orange);
+          display:flex; align-items:center; justify-content:center; }
+  .tile svg { width:56%; height:56%; }
+  .card-head h2 { font-size:clamp(19px,3.08vw,24px); font-weight:600; letter-spacing:-.01em; }
+  .card-head p { font-size:clamp(13px,2.05vw,16px); color:var(--ink2); margin-top:2px; }
+
+  /* ---------- header ---------- */
+  .hero { border:0; border-radius:16px; padding:34px;
+          background:radial-gradient(95% 85% at 100% 0%, rgba(245,135,31,.18), rgba(245,135,31,0) 70%),
+                     linear-gradient(180deg,#3E3E3E 0%, #2C2C2C 100%); }
+  .eyebrow { font-family:var(--mono); font-size:14px; letter-spacing:.31em; color:#B0B0B0; }
+  h1 { font-size:47.5px; font-weight:700; letter-spacing:-.01em; margin:22px 0 20px; line-height:1; }
+  h1 span { color:var(--orange); }
+  .peaks { font-family:var(--mono); font-weight:700; font-size:20px; letter-spacing:0; color:#FFFFFF; }
+  .dates { margin-top:34px; display:flex; align-items:baseline; gap:16px; }
+  .dates b { font-size:33px; letter-spacing:-.01em; }
+  .dates .arrow { font-family:var(--mono); font-size:17px; color:#C2C2C2; }
+  .dates .mon { font-size:20px; color:#C2C2C2; }
+
+  /* ---------- chart ---------- */
+  .chart-card { margin-top:40px; padding:0; background:transparent; }
+  .chart-title { font-family:var(--mono); font-size:13px; letter-spacing:.24em; color:#C2C2C2; }
+  svg.chart { display:block; width:100%; margin-top:4px; overflow:visible; }
+  .ylab { font-family:var(--mono); font-size:13px; fill:#B0B0B0; }
+  .unit { font-family:var(--mono); font-size:11px; letter-spacing:.14em; fill:#A8A8A8; }
+  .val { font-family:var(--mono); font-weight:700; font-size:15px; fill:#FFFFFF; }
+  .val.cum { fill:var(--orange); }
+  .xcity { font-family:var(--mono); font-size:15px; fill:#DCDCDC; }
+  .xday { font-family:var(--mono); font-size:14px; fill:#A8A8A8; }
+  .legend { display:flex; gap:28px; align-items:center; margin-top:20px; padding-left:0; }
+  .legend span { display:flex; align-items:center; gap:9px; font-size:17px; color:#E8E8E8; }
+  .legend i { width:13px; height:13px; border-radius:50%; display:block; }
+
+  /* ---------- section heads ---------- */
+  .shead { display:flex; align-items:center; gap:18px; margin:44px 0 22px; }
+  .shead h2 { font-family:var(--mono); font-weight:400; font-size:14px; letter-spacing:.26em; color:var(--ink3); }
+  .shead .rule { flex:1; height:1px; background:var(--hair); }
+
+  /* ---------- day list ---------- */
+  .day { display:flex; flex-direction:column; padding:0; margin-bottom:0;
+         background:transparent; border:0; }
+  .day-top { display:flex; align-items:center; gap:20px; }
+  .datebox { width:71px; height:79px; border-radius:10px; background:rgba(255,255,255,.10);
+             display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; flex:none; }
+
+  .dnum { font-size:30px; font-weight:700; letter-spacing:-.01em; line-height:1; }
+  .dmon { font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:#C2C2C2; }
+
+  .dtext { flex:1; }
+  .d-eyebrow { font-family:var(--mono); font-size:13px; letter-spacing:.18em; color:#B0B0B0; margin-bottom:5px; }
+
+  .d-title { font-size:23.5px; font-weight:700; letter-spacing:-.005em; }
+  .d-desc { margin-top:16px; font-size:15.5px; line-height:1.55; color:var(--ink2); }
+  .d-desc p + p, .d-desc ul + p { margin-top:9px; }
+  .d-desc ul { margin:9px 0 0; padding-left:20px; }
+  .d-desc li { margin-top:6px; }
+  .d-desc li::marker { color:inherit; }
+  .icons { display:flex; gap:10px; flex:none; }
+  .icons .ico { width:40px; height:40px; border-radius:10px; background:rgba(0,0,0,.28);
+                color:var(--orange);
+                display:flex; align-items:center; justify-content:center;
+                position:relative; border:0; padding:0; cursor:pointer;
+                -webkit-tap-highlight-color:transparent; }
+  .icons .ico svg { width:21px; height:21px; }
+  .icons.dim .ico { color:#9A9A9A; background:rgba(0,0,0,.18); }
+  .ico::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 9px); right:0;
+      white-space:nowrap; background:#1A1A1A; color:#FFFFFF; border:1px solid rgba(255,255,255,.16);
+      border-radius:9px; padding:7px 10px; font-family:var(--sans); font-size:13px; line-height:1;
+      opacity:0; transform:translateY(4px); pointer-events:none; z-index:5;
+      box-shadow:0 10px 24px rgba(0,0,0,.5);
+      transition:opacity .15s ease, transform .15s ease; }
+  .ico:hover::after, .ico:focus-visible::after, .ico.show::after { opacity:1; transform:translateY(0); }
+  .ico:focus-visible { outline:2px solid rgba(255,255,255,.75); outline-offset:2px; }
+
+  /* ---------- includes ---------- */
+  .two { display:flex; gap:18px; align-items:stretch; }
+  .two .card { flex:1; padding:22px; background:var(--tile); }
+  .inc-head { font-family:var(--mono); font-weight:700; font-size:14px; letter-spacing:.16em;
+              color:#FFFFFF; margin-bottom:16px; }
+  .inc-item { padding:11px 0; border-top:1px solid var(--hair); }
+  .inc-item:first-of-type { padding-top:0; border-top:none; }
+  .inc-t { font-size:18px; font-weight:700; }
+  .inc-s { font-size:17px; color:var(--ink2); margin-top:4px; }
+
+  /* ---------- table ---------- */
+  .table-card { margin-top:20px; padding:22px 26px; }
+  table.grid { width:100%; border-collapse:collapse; }
+  table.grid th { font-family:var(--mono); font-weight:700; font-size:14px; color:#A8A8A8;
+                  padding:8px 0 16px; text-align:center; }
+  table.grid th.rlab { letter-spacing:.16em; text-align:left; }
+  table.grid td { padding:13px 0; text-align:center; font-size:18px; font-weight:700;
+                  border-top:1px solid var(--hair); }
+  table.grid td.rlab { text-align:left; font-size:19px; }
+  table.grid td.no { color:#9A9A9A; font-weight:400; }
+
+  /* ---------- important ---------- */
+  .note { border:1px solid rgba(245,135,31,.55); border-radius:14px; padding:4px 25px;
+          background:rgba(245,135,31,.09); }
+  .note p { font-size:18px; line-height:1.5; padding:14px 0; border-top:1px solid rgba(245,135,31,.28); }
+  .note p:first-child { border-top:none; }
+  .note b { color:var(--orange); }
+  footer { margin-top:46px; text-align:center; font-family:var(--mono); font-size:13px;
+           letter-spacing:.22em; color:#9A9A9A; }
+
+
+  /* ---------- fluid type & spacing ---------- */
+  .hero { padding:clamp(18px,4.36vw,34px); }
+  .eyebrow { font-size:clamp(10px,1.79vw,14px); }
+  h1 { font-size:clamp(28px,6.09vw,47.5px); margin:clamp(14px,2.82vw,22px) 0 clamp(12px,2.56vw,20px); }
+  .peaks { font-size:clamp(12px,2.56vw,20px); }
+  .dates { margin-top:clamp(18px,4.36vw,34px); gap:clamp(9px,2.05vw,16px); }
+  .dates b { font-size:clamp(23px,4.23vw,33px); }
+  .dates .arrow { font-size:clamp(12px,2.18vw,17px); }
+  .dates .mon { font-size:clamp(14px,2.56vw,20px); }
+
+  .chart-card { margin-top:clamp(18px,5.13vw,40px); padding:0; }
+  .chart-title { font-size:clamp(10px,1.67vw,13px); letter-spacing:clamp(.12em,.5vw,.24em); }
+  .legend { flex-wrap:wrap; gap:clamp(10px,3.59vw,28px); margin-top:clamp(12px,2.56vw,20px); }
+  .legend span { font-size:clamp(12px,2.18vw,17px); gap:clamp(6px,1.15vw,9px); }
+  .legend i { width:clamp(9px,1.67vw,13px); height:clamp(9px,1.67vw,13px); }
+
+  .shead { margin:clamp(24px,5.64vw,44px) 0 clamp(14px,2.82vw,22px); gap:clamp(10px,2.31vw,18px); }
+  .shead h2 { font-size:clamp(11px,1.79vw,14px); letter-spacing:clamp(.14em,.5vw,.26em); }
+
+  .tabs { gap:clamp(4px,0.77vw,6px); }
+  .tab { font-size:clamp(12px,1.92vw,15px);
+         padding:clamp(8px,1.41vw,11px) 0 clamp(9px,1.54vw,12px); border-radius:clamp(9px,1.54vw,12px); }
+
+  .panels { margin-top:clamp(10px,1.54vw,12px); }
+  .day { padding:0; }
+  .day-top { gap:clamp(12px,2.56vw,20px); }
+  .datebox { width:clamp(52px,9.10vw,71px); height:clamp(58px,10.13vw,79px);
+             border-radius:clamp(9px,1.54vw,12px); }
+  .dnum { font-size:clamp(21px,3.85vw,30px); }
+  .dmon { font-size:clamp(9px,1.54vw,12px); }
+  .d-eyebrow { font-size:clamp(10px,1.67vw,13px); letter-spacing:clamp(.1em,.35vw,.18em);
+               margin-bottom:clamp(3px,0.64vw,5px); }
+  .d-title { font-size:clamp(16px,3.01vw,23.5px); }
+  .d-desc { font-size:clamp(12.5px,1.99vw,15.5px); margin-top:clamp(12px,2.05vw,16px); }
+  .icons { gap:clamp(6px,1.28vw,10px); }
+  .icons .ico { width:clamp(30px,5.13vw,40px); height:clamp(30px,5.13vw,40px);
+                font-size:clamp(14px,2.31vw,18px); border-radius:clamp(8px,1.41vw,11px); }
+  .ico::after { font-size:clamp(12px,1.67vw,13px); }
+
+  .two { gap:clamp(12px,2.31vw,18px); }
+  .two .card { padding:clamp(16px,2.82vw,22px); }
+  .inc-head { font-size:clamp(11px,1.79vw,14px); margin-bottom:clamp(11px,2.05vw,16px); }
+  .inc-item { padding:clamp(9px,1.41vw,11px) 0; }
+  .inc-t { font-size:clamp(15px,2.31vw,18px); }
+  .inc-s { font-size:clamp(13px,2.18vw,17px); }
+
+  .table-card { margin-top:clamp(12px,2.56vw,20px); padding:clamp(14px,2.82vw,22px) clamp(14px,3.33vw,26px); }
+  table.grid th { font-size:clamp(10px,1.79vw,14px); padding:6px 0 clamp(10px,2.05vw,16px); }
+  table.grid th.rlab { letter-spacing:clamp(.06em,.3vw,.16em); }
+  table.grid td { font-size:clamp(13px,2.31vw,18px); padding:clamp(9px,1.67vw,13px) 0; }
+  table.grid td.rlab { font-size:clamp(14px,2.44vw,19px); }
+
+  .note { padding:4px clamp(14px,3.21vw,25px); border-radius:clamp(12px,2.31vw,18px); }
+  .note p { font-size:clamp(14px,2.31vw,18px); padding:clamp(11px,1.79vw,14px) 0; }
+  footer { margin-top:clamp(26px,5.90vw,46px); font-size:clamp(10px,1.67vw,13px);
+           letter-spacing:clamp(.1em,.4vw,.22em); }
+
+  /* single column for the two include cards on narrow screens */
+  @media (max-width:640px) { .two { flex-direction:column; } }
+
+  /* the chart scales with its box, so counter-scale its labels on small screens */
+  @media (max-width:700px) {
+    .ylab { font-size:17px; } .val { font-size:19px; } .xcity { font-size:19px; }
+    .xday { font-size:18px; } .unit { font-size:14px; }
+  }
+  @media (max-width:520px) {
+    .ylab { font-size:22px; } .val { font-size:23px; } .xcity { font-size:23px; }
+    .xday { font-size:23px; } .unit { display:none; }
+    .sep-prefix { display:none; }
+    .pt circle.dot { r:10; } .hl-ring { stroke-width:3; } .hl-line { stroke-width:2; }
+  }
+
+  /* ---------- day tabs ---------- */
+  .tabs { display:flex; gap:6px; }
+  .tab { flex:1; display:flex; align-items:center; justify-content:center;
+         padding:13px 0; background:var(--tile); border:0; border-radius:9px; cursor:pointer;
+         font-family:var(--sans); font-size:15px; font-weight:500; color:#E2E2E2;
+         transition:color .15s ease, background-color .15s ease; }
+  .tab:hover { color:#FFFFFF; background:#404040; }
+  .tab:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
+  .tab[aria-selected="true"] { color:#FFFFFF; background:#9D9D9D; font-weight:600; }
+  /* ---------- selection ---------- */
+
+  .day[hidden] { display:none; }
+  .chart-note { margin-top:clamp(8px,1.28vw,10px); font-size:clamp(11px,1.54vw,12px);
+                color:#A8A8A8; line-height:1.4; }
+  .pt { cursor:pointer; transition:opacity .15s ease; }
+  svg.chart.has-sel .pt:not(.on) { opacity:.35; }
+  svg.chart.has-sel .xday:not(.on) { fill:#7E7E7E; }
+  .xday { transition:fill .15s ease; }
+  .xday.on { fill:#FFFFFF; font-weight:700; }
+  #hl-line-g, #hl-ring-g { opacity:0; transform:translate(0px,0px);
+       transition:transform .34s cubic-bezier(.33,1.02,.44,1), opacity .22s ease; }
+  .hl-line { stroke:var(--orange); stroke-width:1.2; stroke-dasharray:3 4; opacity:.45; }
+  .hl-ring { fill:none; stroke-width:2; transition:stroke .28s ease; }
+  .hl-ring.ghost { stroke-dasharray:3 3; }
+  .pt circle.dot { transform-box:fill-box; transform-origin:center;
+                   transition:transform .28s cubic-bezier(.34,1.35,.5,1); }
+  .pt circle.halo { transition:fill-opacity .16s ease; }
+  .pt:hover circle.halo { fill-opacity:.16; }
+  .pt:hover circle.dot { transform:scale(1.25); }
+  svg.chart.has-sel .pt:not(.on):hover { opacity:.8; }
+  .pt.on circle.dot { transform:scale(1.15); }
+  .pt.on:hover circle.dot { transform:scale(1.25); }
+  svg.chart.no-anim *, svg.chart.no-anim { transition:none !important; }
+  @media (prefers-reduced-motion:reduce) { .day, .pt, .xday, .tab, .pt circle.dot, .pt circle.halo, #hl-line-g, #hl-ring-g { transition:none; } }
+
+  /* standalone: the chart card leads the page */
+  body { padding:clamp(14px,2.05vw,16px) clamp(14px,4.10vw,32px) clamp(20px,3.33vw,26px); }
+  .chart-card { margin-top:0; }
+  .panels { margin-top:clamp(14px,2.56vw,20px); }
+</style></head><body>
+
+<div class="card chart-card">
+  <header class="card-head">
+    <span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 19 9 8l4 6 2.5-3.8L21.5 19z"/><path d="M9 8l1.6 2.7"/></svg></span>
+    <div><h2>Perfil de altura</h2></div>
+  </header>
+  <svg class="chart" viewBox="0 0 674 328" xmlns="http://www.w3.org/2000/svg" role="img">
+<defs><linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C4C4C4" stop-opacity="0.20"/><stop offset="100%" stop-color="#C4C4C4" stop-opacity="0.02"/></linearGradient></defs>
+<line x1="44" y1="53.9" x2="648" y2="53.9" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="1" stroke-dasharray="4 5"/>
+<text class="ylab" x="41" y="57.9" text-anchor="end">6.400</text>
+<line x1="44" y1="132.6" x2="648" y2="132.6" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="1" stroke-dasharray="4 5"/>
+<text class="ylab" x="41" y="136.6" text-anchor="end">5.400</text>
+<line x1="44" y1="211.3" x2="648" y2="211.3" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="1" stroke-dasharray="4 5"/>
+<text class="ylab" x="41" y="215.3" text-anchor="end">4.400</text>
+<line x1="44" y1="290.0" x2="648" y2="290.0" stroke="#FFFFFF" stroke-opacity="0.20" stroke-width="1.4"/>
+<g id="hl-line-g"><line class="hl-line" x1="0" y1="26" x2="0" y2="297.0"/></g>
+<text class="ylab" x="41" y="294.0" text-anchor="end">3.400</text>
+<text class="unit" transform="translate(14,171.9) rotate(-90)" text-anchor="middle">msnm</text>
+<polygon points="47.0,290.0 47.0,274.3 111.3,164.1 175.7,135.0 240.0,274.3 304.3,153.8 368.7,78.5 433.0,274.3 497.3,203.4 561.7,132.6 626.0,50.9 626.0,290.0" fill="url(#areaFill)"/>
+<polyline points="47.0,274.3 111.3,164.1 175.7,135.0 240.0,274.3 304.3,153.8 368.7,78.5 433.0,274.3 497.3,203.4 561.7,132.6 626.0,50.9" fill="none" stroke="#C4C4C4" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<g class="pt" data-day="06">
+<circle cx="47.0" cy="274.3" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="47.0" cy="274.3" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="47.0" cy="274.3" r="6.5" fill="#8C8C8C" stroke="#232323" stroke-width="2.5"/>
+</g>
+<g class="pt" data-day="07">
+<circle cx="111.3" cy="164.1" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="111.3" cy="164.1" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="111.3" cy="164.1" r="6.5" fill="#F0F0F0" stroke="#393939" stroke-width="2.5"/>
+<text class="val" x="111.3" y="148.1" text-anchor="middle">5.000</text>
+</g>
+<g class="pt" data-day="08">
+<circle cx="175.7" cy="135.0" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="175.7" cy="135.0" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="175.7" cy="135.0" r="8" fill="#F5871F" stroke="#393939" stroke-width="2.5"/>
+<text class="val cum" x="175.7" y="117.0" text-anchor="middle">5.370</text>
+</g>
+<g class="pt" data-day="09">
+<circle cx="240.0" cy="274.3" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="240.0" cy="274.3" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="240.0" cy="274.3" r="6.5" fill="#8C8C8C" stroke="#232323" stroke-width="2.5"/>
+</g>
+<g class="pt" data-day="10">
+<circle cx="304.3" cy="153.8" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="304.3" cy="153.8" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="304.3" cy="153.8" r="6.5" fill="#F0F0F0" stroke="#393939" stroke-width="2.5"/>
+<text class="val" x="304.3" y="137.8" text-anchor="middle">5.130</text>
+</g>
+<g class="pt" data-day="11">
+<circle cx="368.7" cy="78.5" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="368.7" cy="78.5" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="368.7" cy="78.5" r="8" fill="#F5871F" stroke="#393939" stroke-width="2.5"/>
+<text class="val cum" x="368.7" y="60.5" text-anchor="middle">6.088</text>
+</g>
+<g class="pt" data-day="12">
+<circle cx="433.0" cy="274.3" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="433.0" cy="274.3" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="433.0" cy="274.3" r="6.5" fill="#8C8C8C" stroke="#232323" stroke-width="2.5"/>
+</g>
+<g class="pt" data-day="13">
+<circle cx="497.3" cy="203.4" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="497.3" cy="203.4" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="497.3" cy="203.4" r="6.5" fill="#F0F0F0" stroke="#393939" stroke-width="2.5"/>
+<text class="val" x="497.3" y="187.4" text-anchor="middle">4.500</text>
+</g>
+<g class="pt" data-day="14">
+<circle cx="561.7" cy="132.6" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="561.7" cy="132.6" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="561.7" cy="132.6" r="6.5" fill="#F0F0F0" stroke="#393939" stroke-width="2.5"/>
+<text class="val" x="561.7" y="116.6" text-anchor="middle">5.400</text>
+</g>
+<g class="pt" data-day="15">
+<circle cx="626.0" cy="50.9" r="20" fill="none" pointer-events="all"/>
+<circle class="halo" cx="626.0" cy="50.9" r="14" fill="#FFFFFF" fill-opacity="0" pointer-events="none"/>
+<circle class="dot" cx="626.0" cy="50.9" r="8" fill="#F5871F" stroke="#393939" stroke-width="2.5"/>
+<text class="val cum" x="626.0" y="32.9" text-anchor="middle">6.438</text>
+</g>
+<text class="xday" data-day="06" x="47.0" y="316" text-anchor="middle"><tspan class="sep-prefix">SEP </tspan>06</text>
+<text class="xday" data-day="07" x="111.3" y="316" text-anchor="middle">07</text>
+<text class="xday" data-day="08" x="175.7" y="316" text-anchor="middle">08</text>
+<text class="xday" data-day="09" x="240.0" y="316" text-anchor="middle">09</text>
+<text class="xday" data-day="10" x="304.3" y="316" text-anchor="middle">10</text>
+<text class="xday" data-day="11" x="368.7" y="316" text-anchor="middle">11</text>
+<text class="xday" data-day="12" x="433.0" y="316" text-anchor="middle">12</text>
+<text class="xday" data-day="13" x="497.3" y="316" text-anchor="middle">13</text>
+<text class="xday" data-day="14" x="561.7" y="316" text-anchor="middle">14</text>
+<text class="xday" data-day="15" x="626.0" y="316" text-anchor="middle">15</text>
+<g id="hl-ring-g"><circle id="hl-ring" class="hl-ring" cx="0" cy="0" r="14" vector-effect="non-scaling-stroke"/></g>
+</svg>
+  <div class="legend">
+    <span><i style="background:#F0F0F0"></i>Refugio / campo de altura</span>
+    <span><i style="background:#F5871F"></i>Cumbre</span>
+    <span><i style="background:#8C8C8C"></i>Descanso en La Paz</span>
+  </div>
+  <p class="chart-note">La altura indicada corresponde a la altura máxima alcanzada cada día.</p>
+</div>
+
+<div class="panel">
+<div class="tabs" role="tablist" aria-label="Elegir día de la expedición"><button class="tab k-rest" type="button" role="tab" id="tab-06" data-day="06" aria-selected="true" aria-controls="day-06" aria-label="06 de septiembre">06</button><button class="tab k-refugio" type="button" role="tab" id="tab-07" data-day="07" aria-selected="false" aria-controls="day-07" aria-label="07 de septiembre">07</button><button class="tab k-cumbre" type="button" role="tab" id="tab-08" data-day="08" aria-selected="false" aria-controls="day-08" aria-label="08 de septiembre">08</button><button class="tab k-rest" type="button" role="tab" id="tab-09" data-day="09" aria-selected="false" aria-controls="day-09" aria-label="09 de septiembre">09</button><button class="tab k-refugio" type="button" role="tab" id="tab-10" data-day="10" aria-selected="false" aria-controls="day-10" aria-label="10 de septiembre">10</button><button class="tab k-cumbre" type="button" role="tab" id="tab-11" data-day="11" aria-selected="false" aria-controls="day-11" aria-label="11 de septiembre">11</button><button class="tab k-rest" type="button" role="tab" id="tab-12" data-day="12" aria-selected="false" aria-controls="day-12" aria-label="12 de septiembre">12</button><button class="tab k-refugio" type="button" role="tab" id="tab-13" data-day="13" aria-selected="false" aria-controls="day-13" aria-label="13 de septiembre">13</button><button class="tab k-refugio" type="button" role="tab" id="tab-14" data-day="14" aria-selected="false" aria-controls="day-14" aria-label="14 de septiembre">14</button><button class="tab k-cumbre" type="button" role="tab" id="tab-15" data-day="15" aria-selected="false" aria-controls="day-15" aria-label="15 de septiembre">15</button></div>
+<div class="panels">
+<div class="day selected" id="day-06" data-day="06" role="tabpanel" aria-labelledby="tab-06"><div class="day-top"><div class="datebox"><div class="dnum">06</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">LA PAZ</div><div class="d-title">Día de llegada</div></div><div class="icons dim"><button type="button" class="ico" data-tip="Alimentación no incluida" aria-label="Alimentación no incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/><path d="M4.2 20 19.8 4" stroke-width="1.7"/></svg></button><button type="button" class="ico" data-tip="Hospedaje no incluido" aria-label="Hospedaje no incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/><path d="M4.2 20 19.8 4" stroke-width="1.7"/></svg></button></div></div><div class="d-desc"><p>Encuentro en La Paz Bolivia, charla y organización</p></div></div>
+<div class="day" id="day-07" data-day="07" role="tabpanel" aria-labelledby="tab-07" hidden><div class="day-top"><div class="datebox"><div class="dnum">07</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">PEQUEÑO ALPAMAYO</div><div class="d-title">Caminata de aproximación</div></div><div class="icons"><button type="button" class="ico" data-tip="Alimentación incluida" aria-label="Alimentación incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/></svg></button><button type="button" class="ico" data-tip="Hospedaje incluido" aria-label="Hospedaje incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/></svg></button></div></div><div class="d-desc"><p>La Paz – Laguna Chiarkhota</p><ul><li>8:30 AM: Salida de La Paz hacia La Rinconada (4.500 msnm), un viaje de aprox. 2.5 a 3 horas.</li><li>12:00 m: Almuerzo.</li><li>Aproximación: Caminata suave de 1 hora hasta el Campo Base en Laguna Chiarkhota (4.670 msnm).</li><li>3:00 pm: Llegada a campamento base.</li><li>6:00 pm: Cena y descanso.</li></ul></div></div>
+<div class="day" id="day-08" data-day="08" role="tabpanel" aria-labelledby="tab-08" hidden><div class="day-top"><div class="datebox"><div class="dnum">08</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">PEQUEÑO ALPAMAYO</div><div class="d-title">Día de cumbre</div></div><div class="icons"><button type="button" class="ico" data-tip="Alimentación incluida" aria-label="Alimentación incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/></svg></button><button type="button" class="ico" data-tip="Hospedaje incluido" aria-label="Hospedaje incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/></svg></button></div></div><div class="d-desc"><ul><li>01:00 AM: Inicio del ascenso. Se bordea la laguna y se asciende por morrena hasta el glaciar. Aproximadamente 6 a 8 horas.</li><li>Pico Tarija (5.300 msnm): Se debe alcanzar primero esta cumbre. Desde aquí se realiza un pequeño descenso técnico en roca/hielo (aprox. 50 m) para conectar con la arista final.</li><li>Cumbre: Ascenso por la arista final hasta la cima del Pequeño Alpamayo (5.410 msnm).</li><li>Retorno: Descenso al Campo Base, breve descanso para tomar desayuno, caminata a La Rinconada y transporte de vuelta a La Paz (llegada aprox. 6:00 pm).</li></ul></div></div>
+<div class="day" id="day-09" data-day="09" role="tabpanel" aria-labelledby="tab-09" hidden><div class="day-top"><div class="datebox"><div class="dnum">09</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">LA PAZ</div><div class="d-title">Día libre</div></div><div class="icons dim"><button type="button" class="ico" data-tip="Alimentación no incluida" aria-label="Alimentación no incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/><path d="M4.2 20 19.8 4" stroke-width="1.7"/></svg></button><button type="button" class="ico" data-tip="Hospedaje no incluido" aria-label="Hospedaje no incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/><path d="M4.2 20 19.8 4" stroke-width="1.7"/></svg></button></div></div><div class="d-desc"><p>Descanso</p></div></div>
+<div class="day" id="day-10" data-day="10" role="tabpanel" aria-labelledby="tab-10" hidden><div class="day-top"><div class="datebox"><div class="dnum">10</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">HUAYNA POTOSÍ</div><div class="d-title">Caminata de aproximación</div></div><div class="icons"><button type="button" class="ico" data-tip="Alimentación incluida" aria-label="Alimentación incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/></svg></button><button type="button" class="ico" data-tip="Hospedaje incluido" aria-label="Hospedaje incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/></svg></button></div></div><div class="d-desc"><p>El Huayna Potosí (6.088 msnm) es posiblemente el «seismil» más popular del mundo debido a su rápido acceso desde La Paz y su ruta normal técnicamente asequible.</p><p>La Paz – Campo Base – Práctica en glaciar</p><ul><li>Salida: Partida desde La Paz esquina Illampu y Sagárnaga (aprox. 8:30 AM) hacia el Paso Zongo (4.700 msnm). El trayecto dura unas 2 horas.</li><li>11:30 am: Almuerzo en el refugio del Campo Base.</li><li>11:30 am: Treking durante 3 horas aproximadamente al campo alto de Huayna Potosí (5.270 msnm) y descanso.</li><li>5:00 pm: Cena y organización para intento de cumbre.</li></ul></div></div>
+<div class="day" id="day-11" data-day="11" role="tabpanel" aria-labelledby="tab-11" hidden><div class="day-top"><div class="datebox"><div class="dnum">11</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">HUAYNA POTOSÍ</div><div class="d-title">Día de cumbre</div></div><div class="icons"><button type="button" class="ico" data-tip="Alimentación incluida" aria-label="Alimentación incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/></svg></button><button type="button" class="ico" data-tip="Hospedaje incluido" aria-label="Hospedaje incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/></svg></button></div></div><div class="d-desc"><p>Intento de cumbre – Retorno a La Paz</p><ul><li>12:00 M: Desayuno y organización.</li><li>1:00 AM: Inicio del ascenso en total oscuridad. Se avanza encordado por el glaciar.</li></ul><p>Pasos clave:</p><ul><li>Pala Chica: Una pared de nieve/hielo de unos 30-50 m.</li><li>La arista final: Un tramo expuesto y estético que lleva directamente a la cima.</li><li>Cumbre: Llegada al amanecer, 6.088 msnm (aprox. 06:30 AM). Vistas espectaculares del Lago Titicaca y la Cordillera Real.</li><li>Descenso: Retorno al Campo Alto (2 horas), breve descanso, desayuno y descenso final al Campo Base (1.5 horas).</li><li>Retorno: Transporte de regreso a La Paz, llegando alrededor de las 4:00 pm.</li></ul></div></div>
+<div class="day" id="day-12" data-day="12" role="tabpanel" aria-labelledby="tab-12" hidden><div class="day-top"><div class="datebox"><div class="dnum">12</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">LA PAZ</div><div class="d-title">Día libre</div></div><div class="icons dim"><button type="button" class="ico" data-tip="Alimentación no incluida" aria-label="Alimentación no incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/><path d="M4.2 20 19.8 4" stroke-width="1.7"/></svg></button><button type="button" class="ico" data-tip="Hospedaje no incluido" aria-label="Hospedaje no incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/><path d="M4.2 20 19.8 4" stroke-width="1.7"/></svg></button></div></div><div class="d-desc"><p>Descanso</p></div></div>
+<div class="day" id="day-13" data-day="13" role="tabpanel" aria-labelledby="tab-13" hidden><div class="day-top"><div class="datebox"><div class="dnum">13</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">ILLIMANI</div><div class="d-title">Ascenso en montaña</div></div><div class="icons"><button type="button" class="ico" data-tip="Alimentación incluida" aria-label="Alimentación incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/></svg></button><button type="button" class="ico" data-tip="Hospedaje incluido" aria-label="Hospedaje incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/></svg></button></div></div><div class="d-desc"><p>El Illimani (6.438 msnm) es el guardián de la ciudad de La Paz y el desafío definitivo para muchos montañistas en la Cordillera Real. Es una montaña exigente que requiere una condición física excelente y una aclimatación técnica previa (idealmente haber subido el Huayna Potosí antes).</p><p>Itinerario: Nevado Illimani (3 días)</p><p>La Paz – Pinaya – Campo Base (Puente Roto)</p><ul><li>8:00 AM: Traslado de La Paz en 4×4 hacia el pueblo de Pinaya (aprox. 3-5 horas). El camino ofrece vistas espectaculares del gigante de los Andes.</li><li>1:00 PM: Aproximación: Caminata de 2 a 3 horas desde Pinaya hasta el Campo Base, conocido como Puente Roto (4.500 msnm). Es un campamento cómodo y amplio.</li><li>4:00 PM: Descanso: Campamento base (carpa).</li></ul></div></div>
+<div class="day" id="day-14" data-day="14" role="tabpanel" aria-labelledby="tab-14" hidden><div class="day-top"><div class="datebox"><div class="dnum">14</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">ILLIMANI</div><div class="d-title">Ascenso en montaña</div></div><div class="icons"><button type="button" class="ico" data-tip="Alimentación incluida" aria-label="Alimentación incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/></svg></button><button type="button" class="ico" data-tip="Hospedaje incluido" aria-label="Hospedaje incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/></svg></button></div></div><div class="d-desc"><p>Campo Base – Campo Alto (Nido de Cóndores)</p><ul><li>7:00 AM: Desayuno y alistamiento de equipos.</li><li>8:00 AM: Trekking exigente de 4 a 5 horas por sendero de roca y morrena.</li><li>1:00 PM: Campamento Nido de Cóndores (5.500 msnm). Es un campamento espectacular ubicado en una arista de roca, pero muy frío y expuesto al viento.</li><li>6:00 AM: Cena y descanso.</li></ul></div></div>
+<div class="day" id="day-15" data-day="15" role="tabpanel" aria-labelledby="tab-15" hidden><div class="day-top"><div class="datebox"><div class="dnum">15</div><div class="dmon">SEP</div></div><div class="dtext"><div class="d-eyebrow">ILLIMANI</div><div class="d-title">Cumbre y fin de expedición</div></div><div class="icons"><button type="button" class="ico" data-tip="Alimentación incluida" aria-label="Alimentación incluida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5a2.5 2.5 0 0 0 5 0V3"/><path d="M9.5 3v5"/><path d="M9.5 10.5V21"/><path d="M18 21v-8c-1.7 0-3-1.3-3-3 0-3 1.3-6 3-7 1.7 1 3 4 3 7 0 1.7-1.3 3-3 3"/></svg></button><button type="button" class="ico" data-tip="Hospedaje incluido" aria-label="Hospedaje incluido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7v12"/><path d="M3 13.5h18"/><path d="M21 19v-5a3 3 0 0 0-3-3H9.5v2.5"/><circle cx="6.9" cy="10.4" r="1.9"/></svg></button></div></div><div class="d-desc"><ul><li>12:00 PM: Intento de Cumbre Sur (6.438 msnm).</li><li>01:00 AM: Inicio del ascenso. Es una jornada larga de 6 a 9 horas de subida.</li><li>Desafíos técnicos:</li><li>La Gran Muralla.</li><li>Grietas: Se debe navegar con cuidado por un glaciar muy fracturado.</li><li>Altitud: El esfuerzo por encima de los 6.000 m es agotador.</li><li>Cumbre: Llegada a la cima sur, el punto más alto.</li><li>8:00 AM: Descenso: Retorno a Nido de Cóndores para descansar y desayunar. Continuar el descenso hasta el Campo Base.</li></ul><p>Campo Base – Pinaya – La Paz</p><ul><li>Descenso: Caminata final de retorno a Pinaya (2 horas).</li><li>Retorno: Encuentro con el transporte 4×4 y regreso a La Paz, llegando por la tarde para una merecida cena de celebración.</li><li>Al siguiente día vamos a parchar al Salar de Uyuni, cementerio de trenes y Laguna Cañapa para hacer observación de flamencos.</li></ul><p>Este corre por tu cuenta $</p></div></div>
+</div>
+</div>
+
+<script>
+(function () {
+  var PTS = {"06": {"x": 47.0, "y": 274.3, "r": 6.5, "color": "#8A97A8", "ghost": false}, "07": {"x": 111.3, "y": 164.1, "r": 6.5, "color": "#F0F0F0", "ghost": false}, "08": {"x": 175.7, "y": 135.0, "r": 8, "color": "#F5871F", "ghost": false}, "09": {"x": 240.0, "y": 274.3, "r": 6.5, "color": "#8A97A8", "ghost": false}, "10": {"x": 304.3, "y": 153.8, "r": 6.5, "color": "#F0F0F0", "ghost": false}, "11": {"x": 368.7, "y": 78.5, "r": 8, "color": "#F5871F", "ghost": false}, "12": {"x": 433.0, "y": 274.3, "r": 6.5, "color": "#8A97A8", "ghost": false}, "13": {"x": 497.3, "y": 203.4, "r": 6.5, "color": "#F0F0F0", "ghost": false}, "14": {"x": 561.7, "y": 132.6, "r": 6.5, "color": "#F0F0F0", "ghost": false}, "15": {"x": 626.0, "y": 50.9, "r": 8, "color": "#F5871F", "ghost": false}};
+  var svg = document.querySelector('svg.chart');
+  var lineG = document.getElementById('hl-line-g');
+  var ringG = document.getElementById('hl-ring-g');
+  var hlRing = document.getElementById('hl-ring');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.day'));
+  var labels = Array.prototype.slice.call(document.querySelectorAll('.xday'));
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var current = null;
+
+  function select(day) {
+    if (!day || day === current) return;
+    current = day;
+
+    cards.forEach(function (c) {
+      var on = c.dataset.day === day;
+      c.classList.toggle('selected', on);
+      c.hidden = !on;
+    });
+    tabs.forEach(function (t) {
+      var on = t.dataset.day === day;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+    labels.forEach(function (l) { l.classList.toggle('on', l.dataset.day === day); });
+    pts.forEach(function (g) { g.classList.toggle('on', g.dataset.day === day); });
+    svg.classList.add('has-sel');
+
+    var p = PTS[day];
+    if (p) {
+      lineG.style.transform = 'translate(' + p.x + 'px, 0px)';
+      ringG.style.transform = 'translate(' + p.x + 'px, ' + p.y + 'px) scale(' + ((p.r + 6) / 14) + ')';
+      hlRing.setAttribute('stroke', p.color);
+      hlRing.classList.toggle('ghost', !!p.ghost);
+      lineG.style.opacity = '1';
+      ringG.style.opacity = '1';
+    } else {
+      lineG.style.opacity = '0';
+      ringG.style.opacity = '0';
+    }
+  }
+
+  pts.forEach(function (g) {
+    g.addEventListener('click', function () { select(g.dataset.day); });
+  });
+
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(t.dataset.day); });
+    t.addEventListener('keydown', function (e) {
+      var step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!step) return;
+      e.preventDefault();
+      var next = tabs[(i + step + tabs.length) % tabs.length];
+      next.focus();
+      select(next.dataset.day);
+    });
+  });
+
+  // tooltips: hover and focus are CSS; tap needs a toggle
+  var tips = Array.prototype.slice.call(document.querySelectorAll('.ico'));
+  tips.forEach(function (t) {
+    t.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var was = t.classList.contains('show');
+      tips.forEach(function (o) { o.classList.remove('show'); });
+      t.classList.toggle('show', !was);
+    });
+  });
+  document.addEventListener('click', function () {
+    tips.forEach(function (o) { o.classList.remove('show'); });
+  });
+
+  // first paint: place the highlight without animating it in from the left
+  svg.classList.add('no-anim');
+  select(document.querySelector('.tab[aria-selected="true"]').dataset.day);
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { svg.classList.remove('no-anim'); });
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,53 @@
+:host {
+  --date-range-tabs-orange: #f5871f;
+  --date-range-tabs-tile: #323232;
+
+  display: block;
+  font-family: Poppins, sans-serif;
+}
+
+.date-range-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(4px, 0.77vw, 6px);
+
+  &__tab {
+    flex: 1;
+    min-width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(8px, 1.41vw, 11px) clamp(12px, 1.79vw, 14px) clamp(9px, 1.54vw, 12px);
+    background: var(--date-range-tabs-tile);
+    border: 0;
+    border-radius: clamp(9px, 1.54vw, 12px);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: clamp(12px, 1.92vw, 15px);
+    font-weight: 500;
+    color: #e2e2e2;
+    transition: color 0.15s ease, background-color 0.15s ease;
+
+    &:focus-visible {
+      outline: 2px solid var(--date-range-tabs-orange);
+      outline-offset: 2px;
+    }
+
+    &:hover {
+      color: #ffffff;
+      background: #404040;
+    }
+
+    &--selected {
+      color: #ffffff;
+      background: #9d9d9d;
+      font-weight: 600;
+    }
+
+    // `:hover` alone outweighs a single class on specificity, so the selected tab
+    // needs its own `:hover` override to keep its look when hovered.
+    &--selected:hover {
+      background: #9d9d9d;
+    }
+  }
+}
