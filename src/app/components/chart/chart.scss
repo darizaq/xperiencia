@@ -195,3 +195,49 @@
     line-height: 1.4;
   }
 }
+
+// The chart's text is sized in SVG user units tied to its 674-wide viewBox, so as the
+// whole chart shrinks to fit a narrow screen, that text shrinks right along with it —
+// unlike the rest of the page, which uses viewport-relative HTML font sizes. These counter
+// -scale the SVG text back up so it stays legible once the chart itself has gotten small.
+@media (max-width: 700px) {
+  .chart__ylabel {
+    font-size: 17px;
+  }
+  .chart__value {
+    font-size: 19px;
+  }
+  .chart__xday {
+    font-size: 18px;
+  }
+  .chart__unit {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .chart__ylabel {
+    font-size: 22px;
+  }
+  .chart__value {
+    font-size: 23px;
+  }
+  .chart__xday {
+    font-size: 23px;
+  }
+  .chart__unit {
+    display: none;
+  }
+  .chart__xday-prefix {
+    display: none;
+  }
+  .chart__point-dot {
+    r: 10px;
+  }
+  .chart__highlight-ring {
+    stroke-width: 3;
+  }
+  .chart__highlight-line {
+    stroke-width: 2;
+  }
+}

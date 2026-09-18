@@ -25,7 +25,7 @@
     border-radius: clamp(9px, 1.54vw, 12px);
     cursor: pointer;
     font-family: inherit;
-    font-size: clamp(12px, 1.92vw, 15px);
+    font-size: clamp(14px, 1.92vw, 15px);
     font-weight: 500;
     color: #e2e2e2;
     transition: color 0.15s ease, background-color 0.15s ease;
@@ -90,7 +90,7 @@
 
   &__mon {
     font-family: inherit;
-    font-size: clamp(9px, 1.54vw, 12px);
+    font-size: clamp(11px, 1.54vw, 12px);
     letter-spacing: 0.16em;
     color: #c2c2c2;
   }
@@ -101,7 +101,7 @@
 
   &__eyebrow {
     font-family: inherit;
-    font-size: clamp(10px, 1.67vw, 13px);
+    font-size: clamp(12px, 1.67vw, 13px);
     letter-spacing: clamp(0.1em, 0.35vw, 0.18em);
     color: #b0b0b0;
     margin-bottom: clamp(3px, 0.64vw, 5px);
@@ -121,7 +121,7 @@
 
   &__desc {
     margin-top: clamp(12px, 2.05vw, 16px);
-    font-size: clamp(12.5px, 1.99vw, 15.5px);
+    font-size: clamp(14px, 1.99vw, 15.5px);
     line-height: 1.55;
     color: var(--tabs-ink2);
 
