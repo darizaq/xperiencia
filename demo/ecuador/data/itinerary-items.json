@@ -1,0 +1,62 @@
+[
+  {
+    "dayNumber": 1,
+    "elevation": 4790,
+    "category": "baseCamp",
+    "basePlace": "Volcán Corazón",
+    "title": "Caminata de aclimatación",
+    "content": "<p>Machachi – Volcán Corazón</p><ul><li>6:00 am: Encuentro en la ciudad de Machachi, Ecuador.</li><li>6:00 a 7:00 am: Desayuno.</li><li>7:00 a 8:00 am: Traslado al Volcán Corazón (4.790 msnm).</li><li>9:30 am: Inicio del trekking al Volcán Corazón.</li><li>2:30 pm: Descenso al parqueadero.</li><li>4:00 pm: Almuerzo de marcha.</li><li>4:30 pm: Llegada a la ciudad de Machachi.</li></ul><p>Este día es de vital importancia, ya que hace parte de una aclimatación progresiva para los volcanes Cotopaxi y Chimborazo.</p><p>Esta noche no incluye hospedaje.</p>",
+    "mealsIncluded": true,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 2,
+    "elevation": 4864,
+    "category": "baseCamp",
+    "basePlace": "Refugio José Rivas – Cotopaxi",
+    "title": "Caminata de aproximación",
+    "content": "<ul><li>8:00 am: Desayuno.</li><li>10:00 am: Traslado al Parque Nacional Cotopaxi.</li><li>11:30 am: Trekking de aproximadamente 40 minutos al Refugio José Rivas, ubicado a 4.864 msnm.</li><li>12:30 pm: Almuerzo y alistamiento de equipo esencial para el intento de cumbre del Cotopaxi.</li><li>6:00 pm: Cena y descanso.</li></ul><p>Nota: traer saco de dormir (sleeping) para los refugios.</p>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 3,
+    "elevation": 5897,
+    "category": "summit",
+    "basePlace": "Volcán Cotopaxi",
+    "title": "Día de cumbre",
+    "content": "<ul><li>11:00 pm (noche anterior): Bebida caliente e inicio del intento de cumbre del Volcán Cotopaxi, en su punto más alto a 5.897 msnm.</li><li>5:00 am: Llegada al borde del glaciar y colocación de equipo técnico de nieve.</li><li>8:00 am: Cumbre. Se intenta la mejor toma fotográfica, si el clima lo permite, y se inicia el descenso al refugio.</li><li>12:00 m: Llegada al refugio; alistamos el equipaje completo, tomamos desayuno (incluido) y nos desplazamos al parqueadero del Cotopaxi.</li><li>3:00 pm: El vehículo nos traslada hasta la ciudad de Machachi. Cena (no incluida) y descanso.</li></ul><p>Nota: el descanso y hospedaje de esta noche no están incluidos.</p>",
+    "mealsIncluded": true,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 4,
+    "elevation": 2850,
+    "category": "baseCity",
+    "basePlace": "Machachi",
+    "title": "Día libre",
+    "content": "<p>Descanso. Alimentación y hospedaje no incluidos.</p>",
+    "mealsIncluded": false,
+    "acommodationIncluded": false
+  },
+  {
+    "dayNumber": 5,
+    "elevation": 4850,
+    "category": "baseCamp",
+    "basePlace": "Refugio Carrel – Chimborazo",
+    "title": "Caminata de aproximación",
+    "content": "<ul><li>8:00 am: Desayuno.</li><li>9:00 am: Traslado hasta el Refugio Hermanos Carrel, en el Volcán Chimborazo.</li><li>12:00 m: Almuerzo en un restaurante de montaña catalogado como uno de los más altos del mundo.</li><li>1:00 pm: Ingreso al Parque Nacional Chimborazo.</li><li>2:30 pm: Ubicación en la zona de descanso y trekking de reconocimiento alrededor de la zona, para aclimatar a la altura alcanzada.</li><li>6:00 pm: Cena y descanso.</li></ul>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  },
+  {
+    "dayNumber": 6,
+    "elevation": 6263,
+    "category": "summit",
+    "basePlace": "Volcán Chimborazo",
+    "title": "Cumbre y fin de expedición",
+    "content": "<ul><li>11:00 pm: Inicio del intento de cumbre.</li><li>6:00 am: Llegada a la cumbre Veintimilla.</li><li>7:00 am: Llegada a la cumbre máxima, Whymper (6.263 msnm). Dependiendo del clima, podremos tomarnos el tiempo necesario para disfrutar la vista y las mejores fotos.</li><li>8:00 am: Trekking de descenso hacia el campamento de altura.</li><li>1:00 pm: Descanso y merienda.</li><li>3:00 pm: Trekking de descenso al Refugio Carrel, donde nos espera el transporte privado.</li><li>4:00 pm: El vehículo nos traslada hasta la ciudad de Machachi, donde llegamos al hostal y procedemos a descansar. El resto del día es libre, y allí termina nuestra expedición.</li></ul><p>Se sugiere que el montañista llegue un día antes, para evitar retrasos en cada momento de nuestra Xperiencia. Es indispensable contar con experiencia en alta montaña.</p>",
+    "mealsIncluded": true,
+    "acommodationIncluded": true
+  }
+]
